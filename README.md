@@ -59,6 +59,34 @@ Phase 2 added the first visible UI layout for the trip days:
 - The layout is responsive and styled for clarity.
 
 ### Next Steps
+
+### Item Rendering Test Instructions
+
+To test automatic item rendering from localStorage:
+
+1. Open the browser console and paste:
+   ```js
+   const trip = JSON.parse(localStorage.getItem('currentTrip'));
+   trip.days[0].items.push({
+     id: 'test1',
+     title: 'Test Activity',
+     category: 'activity',
+     dayIndex: 0,
+     segment: 'morning',
+     startTime: '09:00',
+     durationMinutes: 60,
+     cost: 25,
+     status: 'active'
+   });
+   localStorage.setItem('currentTrip', JSON.stringify(trip));
+   location.reload();
+   ```
+2. You should see the item card appear under Day 1 → Morning.
+3. Confirm the card displays:
+   - Title: "Test Activity"
+   - Time: "09:00 (60 min)"
+   - Cost: "$25"
+4. Ensure no console errors occur.
 - Add item card rendering logic inside each segment.
 - Enable item creation and editing.
 - Display per-day and trip-level cost totals.

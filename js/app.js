@@ -4,6 +4,7 @@ import { Trip } from './models/Trip.js';
 import { StorageService } from './services/StorageService.js';
 import { TripHeader } from './ui/TripHeader.js';
 import { DayColumn } from './ui/DayColumn.js';
+import { ItemManager } from './ui/ItemManager.js';
 
 import { ItemCard } from './ui/ItemCard.js';
 window.ItemCard = ItemCard;
@@ -27,5 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
       : `Day ${i + 1}`;
     const dayCol = new DayColumn(i, label).render();
     root.appendChild(dayCol);
-  });
+  // Render items into segments
+  const itemManager = new ItemManager(trip);
+  itemManager.renderAll();
+});
 });

@@ -124,6 +124,27 @@ itinerary-planner/
 
 #### Tests to Perform:
 
+- Add a test item to localStorage and verify it renders:
+  ```js
+  const trip = JSON.parse(localStorage.getItem('currentTrip'));
+  trip.days[0].items.push({
+    id: 'test1',
+    title: 'Test Activity',
+    category: 'activity',
+    dayIndex: 0,
+    segment: 'morning',
+    startTime: '09:00',
+    durationMinutes: 60,
+    cost: 25,
+    status: 'active'
+  });
+  localStorage.setItem('currentTrip', JSON.stringify(trip));
+  location.reload();
+  ```
+- Confirm the item card appears under Day 1 → Morning.
+- Verify the card displays the correct title, time, and cost.
+- Ensure no console errors occur.
+
 - Open the browser console and reload the app.
 - Manually inject a test item into a segment:
   ```js
