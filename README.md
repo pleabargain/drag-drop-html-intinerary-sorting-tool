@@ -17,6 +17,14 @@ A simple, client‑side tool to plan multi‑day itineraries with drag‑and‑d
 
 Last updated: 2025-08-13
 
+## Recent Bug Fixes
+
+### Duplicate Item Rendering (Fixed 2025-08-13)
+- **Issue**: Clicking "Add Test Itin Item" created 3 duplicate items in Day 1 Morning.
+- **Cause**: `ItemManager.renderAll()` and `new DragDropManager()` were being called inside a loop in `app.js`, causing multiple renderings.
+- **Fix**: Moved those calls outside the loop so they execute only once.
+- **Test**: Click the debug button and confirm only one item appears.
+
 ## Phase One Implementation
 
 ## Phase Two Implementation

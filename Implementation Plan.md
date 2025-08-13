@@ -120,6 +120,14 @@ itinerary-planner/
 
 #### Debug Tools
 
+#### Duplicate Item Rendering Bug (Fixed 2025-08-13)
+
+- **Issue**: Clicking "Add Test Itin Item" created 3 duplicate items in Day 1 Morning.
+- **Root Cause**: The `ItemManager.renderAll()` and `new DragDropManager()` were being called inside the loop that renders day columns in `app.js`, causing items to be rendered multiple times.
+- **Fix**: Moved the item rendering and drag-drop initialization outside the loop so they are only called once.
+- **File Modified**: `js/app.js`
+- **Test**: Click "Add Test Itin Item" and confirm only one item appears in Day 1 Morning.
+
 Two debug buttons have been added to the UI:
 
 - **Clear All Memory**: Clears localStorage and shows a confirmation alert. The user must manually reload the page to avoid the app auto-saving a new default trip.

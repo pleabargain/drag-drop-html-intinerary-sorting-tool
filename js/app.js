@@ -29,10 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
       : `Day ${i + 1}`;
     const dayCol = new DayColumn(i, label).render();
     root.appendChild(dayCol);
+  });
+
   // Render items into segments
   const itemManager = new ItemManager(trip);
   itemManager.renderAll();
+
   // Enable drag and drop
   new DragDropManager(trip);
-});
 });
