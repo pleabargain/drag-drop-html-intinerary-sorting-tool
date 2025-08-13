@@ -122,12 +122,37 @@ itinerary-planner/
 
 Two debug buttons have been added to the UI:
 
-- **Clear All Memory**: Clears localStorage and reloads the app.
-- **Show All Memory**: Displays the current localStorage contents in a popup.
+- **Clear All Memory**: Clears localStorage and shows a confirmation alert. The user must manually reload the page to avoid the app auto-saving a new default trip.
+- **Show All Memory**: Displays the current localStorage contents in a new window with an expandable, copyable `<pre>` block for easier inspection and sharing.
 
 These tools help prevent duplication and allow inspection of the app's memory state.
 
-#### Console Testing Issues
+- **Add Test Itin Item**: Adds a single test item to Day 1, Morning segment. Useful for verifying rendering and layout without using the console.
+- **Test Trip**: Adds one test item per segment (morning, afternoon, evening) for each day. Ensures full coverage of the layout and drag-drop logic.
+
+#### Persistent Duplication Bug
+
+- The app reads from localStorage multiple times: once on load, and again during debug button execution.
+- Items are rendered based on their array location (`trip.days[X].items`) but their `dayIndex` may not match.
+- Drag-and-drop updates `item.dayIndex` but does not move the item to the correct day array.
+- This leads to items being rendered in multiple places or duplicated when debug tools run.
+- The bug persists because the app lacks a validation step to ensure data consistency between `dayIndex` and array location.
+
+#### Plan to Catch and Fix
+
+- Add a validation function that checks each item's `dayIndex` against its actual array index.
+- Log mismatches and optionally auto-correct them on load.
+- Update drag-and-drop logic to physically move items between day arrays.
+- Add a debug log to count how many times localStorage is read per session.
+- Add a test to detect duplicate IDs across all days.
+
+#### Robust Testing Strategy
+
+- Validate trip data on every load with a `validateTripData(trip)` function.
+- Add a test harness that logs before/after state of trip data for each operation.
+- Ensure all debug buttons clean and reassign items properly.
+- Add a "Data Integrity Check" button to run validation manually.
+- Add a test that simulates drag-drop and verifies item relocation in both data and UI.
 
 - Console-based item injection often results in duplicates.
 - This is due to the app auto-saving a default trip on load, which may overwrite or merge with injected data.

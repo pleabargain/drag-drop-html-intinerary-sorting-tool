@@ -18,8 +18,75 @@
 
   <section id="debug-controls" style="margin: 1rem; padding: 1rem; border-top: 1px solid #ccc;">
     <h3>Debug Tools</h3>
-    <button onclick="localStorage.clear(); location.reload();">Clear All Memory</button>
-    <button onclick="alert(JSON.stringify(localStorage, null, 2));">Show All Memory</button>
+    <button onclick="(function(){
+      localStorage.clear();
+      setTimeout(() => location.reload(true), 500);
+    })()">Clear All Memory</button>
+    <button onclick="(function(){
+      const pre = document.createElement('pre');
+      pre.textContent = JSON.stringify(localStorage, null, 2);
+      pre.style = 'white-space: pre-wrap; word-wrap: break-word; max-height: 80vh; overflow: auto; padding: 1em; background: #f0f0f0; border: 1px solid #ccc;';
+      const win = window.open('', '_blank', 'width=600,height=600');
+      win.document.body.appendChild(pre);
+    })()">Show All Memory</button>
+    <button onclick="(function(){
+      const trip = JSON.parse(localStorage.getItem('currentTrip'));
+      const exists = trip.days[0].items.some(i => i.title === 'Debug Test Item' && i.startTime === '09:00');
+      if (exists) return alert('Debug Test Item already exists at 09:00');
+
+      const newItem = {
+        id: 'test-' + Math.random().toString(36).slice(2),
+        title: 'Debug Test Item',
+        category: 'activity',
+        dayIndex: 0,
+        segment: 'morning',
+        startTime: '09:00',
+        durationMinutes: 60,
+        cost: 0,
+        status: 'active'
+      };
+      trip.days[0].items.push(newItem);
+      localStorage.setItem('currentTrip', JSON.stringify(trip));
+      location.reload();
+    })()">Add Test Itin Item</button>
+    <button onclick="(function(){
+      const trip = JSON.parse(localStorage.getItem('currentTrip'));
+      const segments = ['morning', 'afternoon', 'evening'];
+      const titles = ['Flight to City', 'Museum Tour', 'Dinner at Bistro'];
+      const startTimes = ['08:00', '12:00', '17:00'];
+
+      // Clean up misplaced items
+      for (let d = 0; d < trip.days.length; d++) {
+        trip.days[d].items = trip.days[d].items.filter(item => item.dayIndex === d);
+      }
+
+      for (let d = 0; d < trip.days.length; d++) {
+        for (let s = 0; s < 3; s++) {
+          const exists = trip.days[d].items.some(i =>
+            i.title === titles[s] &&
+            i.segment === segments[s] &&
+            i.dayIndex === d &&
+            i.startTime === startTimes[s]
+          );
+          if (!exists) {
+            trip.days[d].items.push({
+              id: 'test-' + Math.random().toString(36).slice(2),
+              title: titles[s],
+              category: 'activity',
+              dayIndex: d,
+              segment: segments[s],
+              startTime: startTimes[s],
+              durationMinutes: 60,
+              cost: 0,
+              status: 'active'
+            });
+          }
+        }
+      }
+
+      localStorage.setItem('currentTrip', JSON.stringify(trip));
+      location.reload();
+    })()">Test Trip</button>
   </section>
   <script type="module" src="js/app.js"></script>
 </body>

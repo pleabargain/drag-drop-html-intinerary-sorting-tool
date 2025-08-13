@@ -69,6 +69,21 @@ These tools help prevent duplication and allow inspection of the app's memory st
 
 ### Known Issues with Console Testing
 
+### Debugging the Duplicate Item Bug
+
+This was one of the most difficult bugs to isolate and fix. The root cause was a mismatch between where items were stored (`trip.days[X].items`) and what their `dayIndex` claimed. This caused items to appear multiple times or in the wrong place.
+
+Key challenges:
+- Items were not being moved between day arrays when dragged.
+- Rendering logic trusted the array location, not the `dayIndex`.
+- Debug buttons and console injection could silently introduce inconsistencies.
+- The app auto-saves on load, which could overwrite test data before it was visible.
+
+Fixes included:
+- Reassigning items to the correct day array before rendering.
+- Adding stricter duplicate checks in debug tools.
+- Improving the "Show All Memory" tool to allow copy-paste inspection in a scrollable window.
+
 - Injecting items via console often results in duplicates.
 - This is due to the app auto-saving a default trip on load, which may overwrite or merge with injected data.
 - JSON structure mismatches or race conditions can cause trip data to be malformed or duplicated.
