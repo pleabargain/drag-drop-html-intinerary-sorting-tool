@@ -5,6 +5,7 @@ import { StorageService } from './services/StorageService.js';
 import { TripHeader } from './ui/TripHeader.js';
 import { DayColumn } from './ui/DayColumn.js';
 import { ItemManager } from './ui/ItemManager.js';
+import { DragDropManager } from './ui/DragDropManager.js';
 
 import { ItemCard } from './ui/ItemCard.js';
 window.ItemCard = ItemCard;
@@ -31,5 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Render items into segments
   const itemManager = new ItemManager(trip);
   itemManager.renderAll();
+  // Enable drag and drop
+  new DragDropManager(trip);
 });
 });

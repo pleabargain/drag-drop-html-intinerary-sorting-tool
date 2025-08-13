@@ -118,31 +118,78 @@ itinerary-planner/
 - Basic UI with item display
 - Cost calculation system
 
+#### Debug Tools
+
+Two debug buttons have been added to the UI:
+
+- **Clear All Memory**: Clears localStorage and reloads the app.
+- **Show All Memory**: Displays the current localStorage contents in a popup.
+
+These tools help prevent duplication and allow inspection of the app's memory state.
+
+#### Console Testing Issues
+
+- Console-based item injection often results in duplicates.
+- This is due to the app auto-saving a default trip on load, which may overwrite or merge with injected data.
+- JSON structure mismatches or race conditions can cause trip data to be malformed or duplicated.
+- Manual injection without checking for existing IDs can lead to repeated entries.
+
+#### Recommendations
+
+- Use the new debug buttons instead of console injection.
+- If using the console, always check for existing item IDs before pushing.
+- Consider adding a "Reset Trip" utility in the app for clean test states.
+
 #### What the User Should See:
 - A visible trip header rendered at the top of the page.
 - The trip name and selected currency displayed in the header.
 
 #### Tests to Perform:
 
-- Add a test item to localStorage and verify it renders:
+- Inject 3 unique items into localStorage and verify they render and can be moved:
   ```js
   const trip = JSON.parse(localStorage.getItem('currentTrip'));
-  trip.days[0].items.push({
-    id: 'test1',
-    title: 'Test Activity',
-    category: 'activity',
-    dayIndex: 0,
-    segment: 'morning',
-    startTime: '09:00',
-    durationMinutes: 60,
-    cost: 25,
-    status: 'active'
-  });
+  trip.days[0].items = [
+    {
+      id: 'item-' + Math.random().toString(36).slice(2),
+      title: 'Museum Visit',
+      category: 'activity',
+      dayIndex: 0,
+      segment: 'morning',
+      startTime: '08:00',
+      durationMinutes: 60,
+      cost: 15,
+      status: 'active'
+    },
+    {
+      id: 'item-' + Math.random().toString(36).slice(2),
+      title: 'Lunch at Cafe',
+      category: 'meal',
+      dayIndex: 0,
+      segment: 'afternoon',
+      startTime: '12:00',
+      durationMinutes: 60,
+      cost: 20,
+      status: 'active'
+    },
+    {
+      id: 'item-' + Math.random().toString(36).slice(2),
+      title: 'Evening Show',
+      category: 'activity',
+      dayIndex: 0,
+      segment: 'evening',
+      startTime: '18:00',
+      durationMinutes: 90,
+      cost: 40,
+      status: 'active'
+    }
+  ];
   localStorage.setItem('currentTrip', JSON.stringify(trip));
   location.reload();
   ```
-- Confirm the item card appears under Day 1 → Morning.
-- Verify the card displays the correct title, time, and cost.
+- Confirm each item appears in the correct segment.
+- Drag each item to a different day and segment.
+- Verify the item moves and persists correctly in localStorage.
 - Ensure no console errors occur.
 
 - Open the browser console and reload the app.

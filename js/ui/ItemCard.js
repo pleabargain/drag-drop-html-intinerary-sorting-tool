@@ -18,10 +18,16 @@ export class ItemCard {
       ? `${this.item.startTime} (${this.item.durationMinutes} min)`
       : `${this.item.durationMinutes} min`;
 
+    const handle = document.createElement('div');
+    handle.className = 'drag-handle';
+    handle.textContent = '≡';
+    handle.draggable = true;
+
     const cost = document.createElement('div');
     cost.className = 'item-cost';
     cost.textContent = this.item.cost != null ? `$${this.item.cost}` : '—';
 
+    card.appendChild(handle);
     card.appendChild(title);
     card.appendChild(time);
     card.appendChild(cost);

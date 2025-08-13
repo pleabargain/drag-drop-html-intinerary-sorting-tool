@@ -15,6 +15,12 @@
   <main id="planner-root">
     <!-- Planner UI will be rendered here -->
   </main>
+
+  <section id="debug-controls" style="margin: 1rem; padding: 1rem; border-top: 1px solid #ccc;">
+    <h3>Debug Tools</h3>
+    <button onclick="localStorage.clear(); location.reload();">Clear All Memory</button>
+    <button onclick="alert(JSON.stringify(localStorage, null, 2));">Show All Memory</button>
+  </section>
   <script type="module" src="js/app.js"></script>
 </body>
 </html>

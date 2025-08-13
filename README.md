@@ -58,9 +58,75 @@ Phase 2 added the first visible UI layout for the trip days:
 - The UI now displays a column for each day with labeled segments.
 - The layout is responsive and styled for clarity.
 
+### Debug Tools
+
+Two buttons have been added to the UI for development and testing:
+
+- **Clear All Memory**: Clears all localStorage data and reloads the app.
+- **Show All Memory**: Displays the current contents of localStorage in a popup.
+
+These tools help prevent duplication and allow inspection of the app's memory state.
+
+### Known Issues with Console Testing
+
+- Injecting items via console often results in duplicates.
+- This is due to the app auto-saving a default trip on load, which may overwrite or merge with injected data.
+- JSON structure mismatches or race conditions can cause trip data to be malformed or duplicated.
+
+### Recommendations
+
+- Use the new debug buttons instead of console injection.
+- If using the console, always check for existing item IDs before pushing.
+- Consider adding a "Reset Trip" utility in the app for clean test states.
+
 ### Next Steps
 
 ### Item Rendering Test Instructions
+
+To inject 3 unique items for drag-and-drop testing:
+
+```js
+const trip = JSON.parse(localStorage.getItem('currentTrip'));
+trip.days[0].items = [
+  {
+    id: 'item-' + Math.random().toString(36).slice(2),
+    title: 'Museum Visit',
+    category: 'activity',
+    dayIndex: 0,
+    segment: 'morning',
+    startTime: '08:00',
+    durationMinutes: 60,
+    cost: 15,
+    status: 'active'
+  },
+  {
+    id: 'item-' + Math.random().toString(36).slice(2),
+    title: 'Lunch at Cafe',
+    category: 'meal',
+    dayIndex: 0,
+    segment: 'afternoon',
+    startTime: '12:00',
+    durationMinutes: 60,
+    cost: 20,
+    status: 'active'
+  },
+  {
+    id: 'item-' + Math.random().toString(36).slice(2),
+    title: 'Evening Show',
+    category: 'activity',
+    dayIndex: 0,
+    segment: 'evening',
+    startTime: '18:00',
+    durationMinutes: 90,
+    cost: 40,
+    status: 'active'
+  }
+];
+localStorage.setItem('currentTrip', JSON.stringify(trip));
+location.reload();
+```
+
+You should now be able to drag each item to a different segment or day.
 
 To test automatic item rendering from localStorage:
 
