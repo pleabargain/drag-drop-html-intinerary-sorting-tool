@@ -5,6 +5,10 @@ import { StorageService } from './services/StorageService.js';
 import { TripHeader } from './ui/TripHeader.js';
 import { DayColumn } from './ui/DayColumn.js';
 
+import { ItemCard } from './ui/ItemCard.js';
+window.ItemCard = ItemCard;
+
+
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Planner initialized');
 

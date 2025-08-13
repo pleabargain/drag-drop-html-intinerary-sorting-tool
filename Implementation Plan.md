@@ -123,6 +123,26 @@ itinerary-planner/
 - The trip name and selected currency displayed in the header.
 
 #### Tests to Perform:
+
+- Open the browser console and reload the app.
+- Manually inject a test item into a segment:
+  ```js
+  const item = {
+    id: 'test1',
+    title: 'Test Activity',
+    dayIndex: 0,
+    segment: 'morning',
+    startTime: '09:00',
+    durationMinutes: 60,
+    cost: 25
+  };
+  const card = new ItemCard(item).render();
+  document.querySelector('.segment.morning[data-day-index="0"]').appendChild(card);
+  ```
+- Confirm the item card appears under Day 1 → Morning.
+- Verify the card displays the title, time, and cost.
+- Check that the layout and styling match expectations.
+- Ensure no console errors occur.
 - Confirm the trip header appears on page load.
 - Verify the trip name matches the initialized or loaded trip.
 - Verify the currency label reflects the trip's currency.

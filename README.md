@@ -21,6 +21,33 @@ Last updated: 2025-08-13
 
 ## Phase Two Implementation
 
+### Manual Testing Instructions
+
+To test the item card rendering:
+
+1. Open the browser console and reload the app.
+2. Paste the following code into the console:
+   ```js
+   const item = {
+     id: 'test1',
+     title: 'Test Activity',
+     dayIndex: 0,
+     segment: 'morning',
+     startTime: '09:00',
+     durationMinutes: 60,
+     cost: 25
+   };
+   const card = new ItemCard(item).render();
+   document.querySelector('.segment.morning[data-day-index="0"]').appendChild(card);
+   ```
+3. You should see a card appear under Day 1 → Morning with:
+   - Title: "Test Activity"
+   - Time: "09:00 (60 min)"
+   - Cost: "$25"
+4. Confirm layout and styling match expectations.
+5. Ensure no console errors occur.
+
+
 Phase 2 added the first visible UI layout for the trip days:
 
 - Implemented `DayColumn` component to render each day with morning, afternoon, and evening segments.

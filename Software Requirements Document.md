@@ -31,6 +31,7 @@ LLM Collaboration Process Notes:
 - After each user response, this SRD will be updated immediately with the new decision, and the Q&A will be logged under Decisions & Clarifications.
 - The assistant will continue this process until it reaches at least 90% confidence in the user’s goals and the desired software product.
 - No documents will be deleted or renamed without explicit user approval; changes will be tracked in the Decisions log.
+- The README.md must never be deleted or overwritten. All updates must be appended only.
 
 ### 6. Assumptions (Subject to Clarification)
 - The day is partitioned into three segments with default boundaries:
