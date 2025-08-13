@@ -19,6 +19,24 @@ Last updated: 2025-08-13
 
 ## Phase One Implementation
 
+## Phase Two Implementation
+
+Phase 2 added the first visible UI layout for the trip days:
+
+- Implemented `DayColumn` component to render each day with morning, afternoon, and evening segments.
+- Updated `app.js` to render all trip days dynamically.
+- Styled the layout using `main.css` for responsive columns and segment blocks.
+
+### What to Expect
+- The UI now displays a column for each day with labeled segments.
+- The layout is responsive and styled for clarity.
+
+### Next Steps
+- Add item card rendering logic inside each segment.
+- Enable item creation and editing.
+- Display per-day and trip-level cost totals.
+- Begin wiring up item CRUD operations.
+
 Phase 1 established the foundational structure of the application:
 
 - Created `index.html` with semantic layout and script/style includes.

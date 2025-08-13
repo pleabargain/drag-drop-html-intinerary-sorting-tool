@@ -16,4 +16,28 @@ header {
 
 main {
   padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.day-column {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  flex: 1 1 300px;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.day-header {
+  background-color: #f0f0f0;
+  padding: 0.5rem;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+}
+
+.segment {
+  padding: 0.5rem;
+  border-top: 1px solid #eee;
 }

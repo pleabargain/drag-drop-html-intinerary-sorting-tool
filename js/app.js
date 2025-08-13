@@ -3,6 +3,7 @@
 import { Trip } from './models/Trip.js';
 import { StorageService } from './services/StorageService.js';
 import { TripHeader } from './ui/TripHeader.js';
+import { DayColumn } from './ui/DayColumn.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Planner initialized');
@@ -15,4 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('planner-root');
   const header = new TripHeader(trip).render();
   root.appendChild(header);
+  // Render day columns
+  trip.days.forEach((_, i) => {
+    const label = trip.startDate
+      ? `Day ${i + 1} (${trip.startDate})`
+      : `Day ${i + 1}`;
+    const dayCol = new DayColumn(i, label).render();
+    root.appendChild(dayCol);
+  });
 });
