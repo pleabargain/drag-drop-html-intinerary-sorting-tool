@@ -1,0 +1,22 @@
+{name: "My Trip", currency: "USD",…}
+categories
+: 
+[{key: "activity", name: "Activity", color: "#3498db", icon: "🎯"},…]
+currency
+: 
+"USD"
+days
+: 
+[{date: null, items: []}, {date: null, items: []}, {date: null, items: []}]
+name
+: 
+"My Trip"
+segmentBoundaries
+: 
+{morning: ["08:00", "12:00"], afternoon: ["12:00", "17:00"], evening: ["17:00", "22:00"]}
+startDate
+: 
+null
+timezone
+: 
+"Asia/Dubai"

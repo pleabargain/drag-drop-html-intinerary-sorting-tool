@@ -81,6 +81,15 @@ itinerary-planner/
 - localStorage persistence
 - JSON import/export functionality
 
+#### Tests to Pass:
+- The app loads without errors in the browser and logs "Planner initialized" in the console.
+- A new `Trip` object is created and saved to `localStorage` if none exists.
+- Reloading the page loads the saved trip from `localStorage`.
+- The `Trip`, `Item`, and `Category` classes instantiate correctly and serialize to JSON.
+- The `IdGenerator` produces unique IDs.
+- The `ValidationService` returns a valid result (placeholder).
+- CSS files apply basic layout and responsive styles.
+
 ### Phase 2: Core Functionality (Week 2)
 **Goal**: Implement basic trip and item management
 

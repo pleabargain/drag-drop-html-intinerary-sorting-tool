@@ -1,3 +1,6 @@
+## url
+https://github.com/pleabargain/drag-drop-html-intinerary-sorting-tool
+
 ## Multi‑Day Itinerary Planner (HTML + JavaScript)
 
 A simple, client‑side tool to plan multi‑day itineraries with drag‑and‑drop across days and day segments (morning/afternoon/evening). Items have durations and optional costs. The app calculates per‑day totals and an overall trip total and supports overnight stays.
