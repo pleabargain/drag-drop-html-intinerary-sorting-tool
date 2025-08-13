@@ -2,6 +2,7 @@
 
 import { Trip } from './models/Trip.js';
 import { StorageService } from './services/StorageService.js';
+import { TripHeader } from './ui/TripHeader.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Planner initialized');
@@ -10,5 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const trip = StorageService.loadTrip() || new Trip('My Trip', 'USD', 3);
   StorageService.saveTrip(trip);
 
-  // Future: render UI
+  // Render trip header
+  const root = document.getElementById('planner-root');
+  const header = new TripHeader(trip).render();
+  root.appendChild(header);
 });

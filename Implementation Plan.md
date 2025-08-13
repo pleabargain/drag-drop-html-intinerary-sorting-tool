@@ -118,6 +118,17 @@ itinerary-planner/
 - Basic UI with item display
 - Cost calculation system
 
+#### What the User Should See:
+- A visible trip header rendered at the top of the page.
+- The trip name and selected currency displayed in the header.
+
+#### Tests to Perform:
+- Confirm the trip header appears on page load.
+- Verify the trip name matches the initialized or loaded trip.
+- Verify the currency label reflects the trip's currency.
+- Check that the header layout is styled and responsive.
+- Confirm no console errors occur during rendering.
+
 ### Phase 3: Drag and Drop (Week 3)
 **Goal**: Implement intuitive drag-and-drop functionality
 

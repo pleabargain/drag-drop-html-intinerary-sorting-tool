@@ -12,3 +12,12 @@
 .button:hover {
   background-color: #2980b9;
 }
+
+.trip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ecf0f1;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
